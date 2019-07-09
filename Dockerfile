@@ -49,7 +49,8 @@ RUN apk update --no-cache \
     && make -j"$(nproc)" && make -j"$(nproc)" install \
     && rm -rf /usr/src \
     && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
-    && apk add --no-cache --virtual .gost-rundeps \
+    && apk add --no-cache --virtual .pdf-rundeps \
+        ttf-dejavu \
         $( scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
             | tr ',' '\n' \
             | sort -u \
