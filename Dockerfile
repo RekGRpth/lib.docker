@@ -14,7 +14,7 @@ RUN apk update --no-cache \
         make \
         mesa-dev \
         openssl-dev \
-#        pango-dev \
+        pango-dev \
 #        postgresql-dev \
         qt5-qtbase-dev \
         qt5-qtsvg-dev \
@@ -40,10 +40,8 @@ RUN apk update --no-cache \
         -DENABLE_LIBWTTEST=OFF \
         -DENABLE_MSSQLSERVER=OFF \
         -DENABLE_MYSQL=OFF \
-        -DENABLE_PANGO=OFF \
         -DENABLE_POSTGRES=OFF \
         -DENABLE_SQLITE=OFF \
-        -DSHARED_LIBS=ON \
         . \
     && make -j"$(nproc)" && make -j"$(nproc)" install \
     && rm -rf /usr/src \
