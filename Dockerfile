@@ -4,19 +4,24 @@ RUN apk update --no-cache \
     && apk add --no-cache --virtual .build-deps \
         autoconf \
         automake \
+        file \
         freeglut-dev \
         freetype-dev \
         gcc \
+        gettext-dev \
         git \
         harfbuzz-dev \
         jbig2dec-dev \
         jpeg-dev \
+        libidn-dev \
+        libpsl-dev \
         libssh-dev \
         libtool \
         make \
         musl-dev \
         nghttp2-dev \
         openjpeg-dev \
+        openldap-dev \
         openssl-dev \
         ttf-liberation \
         zlib-dev \
