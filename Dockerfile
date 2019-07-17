@@ -18,6 +18,7 @@ RUN apk update --no-cache \
         libpsl-dev \
         libssh-dev \
         libtool \
+        linux-headers \
         make \
         mt-st \
         musl-dev \
