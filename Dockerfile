@@ -48,6 +48,10 @@ RUN apk update --no-cache \
     && make -j"$(nproc)" install \
     && cd /usr/src/mupdf \
     && make -j"$(nproc)" USE_SYSTEM_LIBS=yes prefix=/usr/local CURL_LIBS='-lcurl -lpthread' build=release install \
+    && ln -fs libmupdf.so.0 /usr/local/lib/libmupdf.so \
+    && ln -fs libmupdfthird.so.0 /usr/local/lib/libmupdfthird.so \
+    && ln -fs libmupdf-threads.so.0 /usr/local/lib/libmupdf-threads.so \
+    && ln -fs libmupdf-pkcs7.so.0 /usr/local/lib/libmupdf-pkcs7.so \
     && apk add --no-cache --virtual .mupdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
