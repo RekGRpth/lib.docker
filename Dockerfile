@@ -5,6 +5,7 @@ RUN apk update --no-cache \
         autoconf \
         automake \
         brotli-dev \
+        dev86 \
         file \
         freeglut-dev \
         freetype-dev \
