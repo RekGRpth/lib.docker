@@ -18,6 +18,7 @@ RUN apk update --no-cache \
         libssh-dev \
         libtool \
         make \
+        mt-st \
         musl-dev \
         nghttp2-dev \
         openjpeg-dev \
