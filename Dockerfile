@@ -4,6 +4,7 @@ RUN apk update --no-cache \
     && apk add --no-cache --virtual .build-deps \
         autoconf \
         automake \
+        brotli-dev \
         file \
         freeglut-dev \
         freetype-dev \
