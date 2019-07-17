@@ -37,6 +37,10 @@ RUN apk update --no-cache \
         --enable-unix-sockets \
         --with-libssh \
         --with-nghttp2 \
+    && make -j"$(nproc)" curl-config install \
+    && cd /usr/src/curl/include \
+    && make -j"$(nproc)" install \
+    && cd /usr/src/curl/lib \
     && make -j"$(nproc)" install \
     && cd /usr/src/mupdf \
     && make -j"$(nproc)" USE_SYSTEM_LIBS=yes prefix=/usr/local CURL_LIBS='-lcurl -lpthread' build=release install \
