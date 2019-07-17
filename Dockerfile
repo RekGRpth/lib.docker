@@ -17,6 +17,7 @@ RUN apk update --no-cache \
         musl-dev \
         nghttp2-dev \
         openjpeg-dev \
+        openssl-dev \
         ttf-liberation \
         zlib-dev \
     && mkdir -p /usr/src \
