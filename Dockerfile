@@ -27,7 +27,6 @@ RUN apk update --no-cache \
         openjpeg-dev \
         openldap-dev \
         openssl-dev \
-        ttf-liberation \
         zlib-dev \
     && mkdir -p /usr/src \
     && cd /usr/src \
