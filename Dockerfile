@@ -1,5 +1,6 @@
 FROM rekgrpth/gost
-RUN apk update --no-cache \
+RUN set -ex \
+    && apk update --no-cache \
     && apk upgrade --no-cache \
     && apk add --no-cache --virtual .build-deps \
         autoconf \
