@@ -8,7 +8,7 @@ RUN set -ex \
         brotli-dev \
         dev86 \
         file \
-        freeglut-dev \
+#        freeglut-dev \
         freetype-dev \
         gcc \
         gettext-dev \
@@ -47,7 +47,7 @@ RUN set -ex \
     && cd /usr/src/curl/lib \
     && make -j"$(nproc)" install \
     && cd /usr/src/mupdf \
-    && make -j"$(nproc)" USE_SYSTEM_LIBS=yes prefix=/usr/local CURL_LIBS='-lcurl -lpthread' build=release install \
+    && make -j"$(nproc)" USE_SYSTEM_LIBS=yes HAVE_X11=no HAVE_GLUT=no prefix=/usr/local CURL_LIBS='-lcurl -lpthread' build=release install \
     && apk add --no-cache --virtual .mupdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
