@@ -6,17 +6,19 @@ RUN set -ex \
         autoconf \
         automake \
         brotli-dev \
+        clang \
         dev86 \
         file \
-#        freeglut-dev \
+        fontconfig-dev \
         freetype-dev \
+        g++ \
         gcc \
         gettext-dev \
         git \
-        harfbuzz-dev \
-        jbig2dec-dev \
         jpeg-dev \
+        libgcrypt-dev \
         libidn-dev \
+        libpng-dev \
         libpsl-dev \
         libssh-dev \
         libtool \
@@ -32,7 +34,7 @@ RUN set -ex \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/curl.git \
-    && git clone --recursive https://github.com/RekGRpth/mupdf.git \
+    && git clone --recursive https://github.com/RekGRpth/htmldoc.git \
     && cd /usr/src/curl \
     && autoreconf -vif \
     && ./configure \
@@ -46,9 +48,15 @@ RUN set -ex \
     && make -j"$(nproc)" install \
     && cd /usr/src/curl/lib \
     && make -j"$(nproc)" install \
-    && cd /usr/src/mupdf \
-    && make -j"$(nproc)" USE_SYSTEM_LIBS=yes HAVE_X11=no HAVE_GLUT=no prefix=/usr/local CURL_LIBS='-lcurl -lpthread' build=release install \
-    && apk add --no-cache --virtual .mupdf-rundeps \
+    && cd /usr/src/htmldoc \
+    && ./configure --without-gui \
+    && cd /usr/src/htmldoc/htmldoc \
+    && make -j"$(nproc)" install \
+    && cd /usr/src/htmldoc/fonts \
+    && make -j"$(nproc)" install \
+    && cd /usr/src/htmldoc/data \
+    && make -j"$(nproc)" install \
+    && apk add --no-cache --virtual .pdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src /usr/local/share/doc /usr/local/share/man \
