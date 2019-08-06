@@ -5,9 +5,7 @@ RUN set -ex \
     && apk add --no-cache --virtual .build-deps \
         autoconf \
         automake \
-        brotli-dev \
         clang \
-        dev86 \
         file \
         fontconfig-dev \
         freetype-dev \
@@ -16,38 +14,16 @@ RUN set -ex \
         gettext-dev \
         git \
         jpeg-dev \
-        libgcrypt-dev \
         libidn-dev \
         libpng-dev \
-        libpsl-dev \
-        libssh-dev \
-        libtool \
         linux-headers \
         make \
-        mt-st \
         musl-dev \
-        nghttp2-dev \
         openjpeg-dev \
-        openldap-dev \
-        openssl-dev \
         zlib-dev \
     && mkdir -p /usr/src \
     && cd /usr/src \
-    && git clone --recursive https://github.com/RekGRpth/curl.git \
     && git clone --recursive https://github.com/RekGRpth/htmldoc.git \
-    && cd /usr/src/curl \
-    && autoreconf -vif \
-    && ./configure \
-        --enable-ipv6 \
-        --enable-ldap \
-        --enable-unix-sockets \
-        --with-libssh \
-        --with-nghttp2 \
-    && make -j"$(nproc)" curl-config install \
-    && cd /usr/src/curl/include \
-    && make -j"$(nproc)" install \
-    && cd /usr/src/curl/lib \
-    && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc \
     && ./configure --without-gui \
     && cd /usr/src/htmldoc/htmldoc \
