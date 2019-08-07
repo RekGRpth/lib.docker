@@ -5,17 +5,13 @@ RUN set -ex \
     && apk add --no-cache --virtual .build-deps \
         autoconf \
         automake \
-        clang \
-#        file \
         fontconfig-dev \
         freetype-dev \
         g++ \
         gcc \
         gettext-dev \
         git \
-        gnutls-dev \
         jpeg-dev \
-#        libidn-dev \
         libpng-dev \
         linux-headers \
         make \
