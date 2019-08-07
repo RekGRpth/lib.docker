@@ -3,8 +3,6 @@ RUN set -ex \
     && apk update --no-cache \
     && apk upgrade --no-cache \
     && apk add --no-cache --virtual .build-deps \
-        autoconf \
-        automake \
         fontconfig-dev \
         freetype-dev \
         g++ \
