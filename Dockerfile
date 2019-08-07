@@ -29,6 +29,7 @@ RUN set -ex \
     && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc/data \
     && make -j"$(nproc)" install \
+    && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .pdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
