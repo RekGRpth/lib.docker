@@ -6,15 +6,16 @@ RUN set -ex \
         autoconf \
         automake \
         clang \
-        file \
+#        file \
         fontconfig-dev \
         freetype-dev \
         g++ \
         gcc \
         gettext-dev \
         git \
+        gnutls-dev \
         jpeg-dev \
-        libidn-dev \
+#        libidn-dev \
         libpng-dev \
         linux-headers \
         make \
