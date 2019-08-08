@@ -3,18 +3,14 @@ RUN set -ex \
     && apk update --no-cache \
     && apk upgrade --no-cache \
     && apk add --no-cache --virtual .build-deps \
-        fontconfig-dev \
-        freetype-dev \
         g++ \
         gcc \
-        gettext-dev \
         git \
         jpeg-dev \
         libpng-dev \
         linux-headers \
         make \
         musl-dev \
-        openjpeg-dev \
         zlib-dev \
     && mkdir -p /usr/src \
     && cd /usr/src \
