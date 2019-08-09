@@ -6,6 +6,7 @@ RUN set -ex \
         g++ \
         gcc \
         git \
+        gnutls-dev \
         jpeg-dev \
         libpng-dev \
         linux-headers \
