@@ -19,6 +19,7 @@ RUN set -ex \
     && cd /usr/src/htmldoc \
     && ./configure --without-gui \
     && cd /usr/src/htmldoc/htmldoc \
+    && make -j"$(nproc)" libhtmldoc.so \
     && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc/fonts \
     && make -j"$(nproc)" install \
