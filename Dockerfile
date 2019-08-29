@@ -1,7 +1,5 @@
 FROM rekgrpth/gost
 RUN set -ex \
-    && apk update --no-cache \
-    && apk upgrade --no-cache \
     && apk add --no-cache --virtual .build-deps \
         g++ \
         gcc \
