@@ -1,5 +1,5 @@
 FROM rekgrpth/gost
-RUN set -x \
+RUN set -ex \
     && apk add --no-cache --virtual .build-deps \
         g++ \
         gcc \
