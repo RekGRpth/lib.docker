@@ -7,6 +7,7 @@ RUN exec 2>&1 \
         git \
         gnutls-dev \
         jpeg-dev \
+        json-c-dev \
         libpng-dev \
         linux-headers \
         make \
@@ -15,6 +16,9 @@ RUN exec 2>&1 \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/htmldoc.git \
+    && git clone --recursive https://gitlab.com/jobol/mustach.git \
+    && cd /usr/src/mustach \
+    && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc \
     && ./configure --without-gui \
     && cd /usr/src/htmldoc/htmldoc \
