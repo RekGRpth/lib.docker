@@ -16,7 +16,7 @@ RUN exec 2>&1 \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/htmldoc.git \
-    && git clone --recursive https://gitlab.com/jobol/mustach.git \
+    && git clone --recursive https://github.com/RekGRpth/mustach.git \
     && cd /usr/src/mustach \
     && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc \
