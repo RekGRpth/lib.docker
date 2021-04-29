@@ -9,7 +9,7 @@ RUN exec 2>&1 \
         gcc \
         git \
         gnutls-dev \
-#        jansson-dev \
+        jansson-dev \
         jpeg-dev \
         json-c-dev \
         libgcrypt-dev \
