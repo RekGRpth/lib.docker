@@ -2,12 +2,17 @@ FROM rekgrpth/gost
 RUN exec 2>&1 \
     && set -ex \
     && apk add --no-cache --virtual .build-deps \
+        cjson-dev \
+        clang \
+        fltk-dev \
         g++ \
         gcc \
         git \
         gnutls-dev \
+        jansson-dev \
         jpeg-dev \
         json-c-dev \
+        libgcrypt-dev \
         libpng-dev \
         linux-headers \
         make \
@@ -17,8 +22,6 @@ RUN exec 2>&1 \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/htmldoc.git \
     && git clone --recursive https://github.com/RekGRpth/mustach.git \
-    && cd /usr/src/mustach \
-    && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc \
     && ./configure --without-gui \
     && cd /usr/src/htmldoc/htmldoc \
@@ -27,6 +30,9 @@ RUN exec 2>&1 \
     && make -j"$(nproc)" install \
     && cd /usr/src/htmldoc/data \
     && make -j"$(nproc)" install \
+    && cd /usr/src/mustach \
+    && make -j"$(nproc)" install \
+    && cd / \
     && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .pdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
