@@ -31,7 +31,7 @@ RUN exec 2>&1 \
     && cd /usr/src/htmldoc/data \
     && make -j"$(nproc)" install \
     && cd /usr/src/mustach \
-    && make -j"$(nproc)" install \
+    && make -j"$(nproc)" libs=single install \
     && cd / \
     && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .pdf-rundeps \
