@@ -1,8 +1,14 @@
 FROM rekgrpth/gost
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
+        autoconf \
+        automake \
+        bison \
+        check-dev \
         cjson-dev \
         clang \
+        file \
+        flex \
         fltk-dev \
         g++ \
         gcc \
@@ -13,15 +19,25 @@ RUN set -eux; \
         json-c-dev \
         libgcrypt-dev \
         libpng-dev \
+        libtool \
         linux-headers \
+        lmdb-dev \
         make \
         musl-dev \
+        pcre-dev \
+        subunit-dev \
+        talloc-dev \
+        yaml-dev \
         zlib-dev \
     ; \
     mkdir -p /usr/src; \
     cd /usr/src; \
-    git clone --recursive https://github.com/RekGRpth/htmldoc.git; \
-    git clone --recursive https://github.com/RekGRpth/mustach.git; \
+    git clone https://github.com/RekGRpth/handlebars.c.git; \
+    git clone https://github.com/RekGRpth/htmldoc.git; \
+    git clone https://github.com/RekGRpth/mustach.git; \
+    cd /usr/src/handlebars.c; \
+    ./configure --disable-static; \
+    make -j"$(nproc)" install; \
     cd /usr/src/htmldoc; \
     ./configure --without-gui; \
     cd /usr/src/htmldoc/htmldoc; \
