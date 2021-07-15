@@ -30,31 +30,31 @@ RUN set -eux; \
         yaml-dev \
         zlib-dev \
     ; \
-    mkdir -p /usr/src; \
-    cd /usr/src; \
+    mkdir -p "${HOME}"; \
+    cd "${HOME}"; \
     git clone https://github.com/RekGRpth/handlebars.c.git; \
     git clone https://github.com/RekGRpth/htmldoc.git; \
     git clone https://github.com/RekGRpth/mustach.git; \
-    cd /usr/src/handlebars.c; \
+    cd "${HOME}/handlebars.c"; \
     ./configure --disable-refcounting --disable-static; \
     make -j"$(nproc)" install; \
-    cd /usr/src/htmldoc; \
+    cd "${HOME}/htmldoc"; \
     ./configure --without-gui; \
-    cd /usr/src/htmldoc/htmldoc; \
+    cd "${HOME}/htmldoc/htmldoc"; \
     make -j"$(nproc)" install; \
-    cd /usr/src/htmldoc/fonts; \
+    cd "${HOME}/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
-    cd /usr/src/htmldoc/data; \
+    cd "${HOME}/htmldoc/data"; \
     make -j"$(nproc)" install; \
-    cd /usr/src/mustach; \
+    cd "${HOME}/mustach"; \
     make -j"$(nproc)" libs=single install; \
-    cd /; \
+    cd "${HOME}"; \
     apk add --no-cache --virtual .pdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | while read -r lib; do test ! -e "/usr/local/lib/$lib" && echo "so:$lib"; done) \
     ; \
     find /usr/local/bin /usr/local/lib -type f -exec strip '{}' \;; \
     apk del --no-cache .build-deps; \
-    rm -rf /usr/src /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
-    find / -name "*.a" -delete; \
-    find / -name "*.la" -delete; \
+    find / -type f -name "*.a" -delete; \
+    find / -type f -name "*.la" -delete; \
+    rm -rf "${HOME}" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
     echo done
