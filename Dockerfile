@@ -36,7 +36,7 @@ RUN set -eux; \
     git clone https://github.com/RekGRpth/htmldoc.git; \
     git clone https://github.com/RekGRpth/mustach.git; \
     cd /usr/src/handlebars.c; \
-    ./configure --disable-static; \
+    ./configure --disable-refcounting --disable-static; \
     make -j"$(nproc)" install; \
     cd /usr/src/htmldoc; \
     ./configure --without-gui; \
