@@ -24,6 +24,7 @@ RUN set -eux; \
         lmdb-dev \
         make \
         musl-dev \
+        openssl-dev \
         pcre-dev \
         subunit-dev \
         talloc-dev \
@@ -34,6 +35,7 @@ RUN set -eux; \
     cd "${HOME}"; \
     git clone https://github.com/RekGRpth/handlebars.c.git; \
     git clone https://github.com/RekGRpth/htmldoc.git; \
+    git clone https://github.com/RekGRpth/libjwt.git; \
     git clone https://github.com/RekGRpth/mustach.git; \
     cd "${HOME}/handlebars.c"; \
     ./configure --disable-refcounting --disable-static; \
@@ -45,6 +47,10 @@ RUN set -eux; \
     cd "${HOME}/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/htmldoc/data"; \
+    make -j"$(nproc)" install; \
+    cd "${HOME}/libjwt"; \
+    autoreconf -vif; \
+    ./configure; \
     make -j"$(nproc)" install; \
     cd "${HOME}/mustach"; \
     make -j"$(nproc)" libs=single install; \
