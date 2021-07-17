@@ -31,28 +31,28 @@ RUN set -eux; \
         yaml-dev \
         zlib-dev \
     ; \
-    mkdir -p "${HOME}"; \
-    cd "${HOME}"; \
+    mkdir -p "${HOME}/src"; \
+    cd "${HOME}/src"; \
     git clone https://github.com/RekGRpth/handlebars.c.git; \
     git clone https://github.com/RekGRpth/htmldoc.git; \
     git clone https://github.com/RekGRpth/libjwt.git; \
     git clone https://github.com/RekGRpth/mustach.git; \
-    cd "${HOME}/handlebars.c"; \
+    cd "${HOME}/src/handlebars.c"; \
     ./configure --disable-refcounting --disable-static; \
     make -j"$(nproc)" install; \
-    cd "${HOME}/htmldoc"; \
+    cd "${HOME}/src/htmldoc"; \
     ./configure --without-gui; \
-    cd "${HOME}/htmldoc/htmldoc"; \
+    cd "${HOME}/src/htmldoc/htmldoc"; \
     make -j"$(nproc)" install; \
-    cd "${HOME}/htmldoc/fonts"; \
+    cd "${HOME}/src/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
-    cd "${HOME}/htmldoc/data"; \
+    cd "${HOME}/src/htmldoc/data"; \
     make -j"$(nproc)" install; \
-    cd "${HOME}/libjwt"; \
+    cd "${HOME}/src/libjwt"; \
     autoreconf -vif; \
     ./configure; \
     make -j"$(nproc)" install; \
-    cd "${HOME}/mustach"; \
+    cd "${HOME}/src/mustach"; \
     make -j"$(nproc)" libs=single install; \
     cd "${HOME}"; \
     apk add --no-cache --virtual .pdf-rundeps \

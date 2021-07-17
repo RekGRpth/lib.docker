@@ -1,3 +1,3 @@
-#!/bin/sh -ex
+#!/bin/sh -eux
 
-docker build --tag rekgrpth/pdf . | tee build.log
+DOCKER_BUILDKIT=1 docker build --progress=plain --tag rekgrpth/pdf . 2>&1 | tee build.log
