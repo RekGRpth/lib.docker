@@ -35,6 +35,7 @@ RUN set -eux; \
     cd "${HOME}/src"; \
     git clone https://github.com/RekGRpth/handlebars.c.git; \
     git clone https://github.com/RekGRpth/htmldoc.git; \
+    git clone https://github.com/RekGRpth/libinjection.git; \
     git clone https://github.com/RekGRpth/libjwt.git; \
     git clone https://github.com/RekGRpth/mustach.git; \
     cd "${HOME}/src/handlebars.c"; \
@@ -47,6 +48,8 @@ RUN set -eux; \
     cd "${HOME}/src/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/htmldoc/data"; \
+    make -j"$(nproc)" install; \
+    cd "${HOME}/src/libinjection/src"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/libjwt"; \
     autoreconf -vif; \
