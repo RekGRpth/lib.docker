@@ -1,4 +1,4 @@
-FROM rekgrpth/gost
+FROM ghcr.io/rekgrpth/gost
 RUN set -eux; \
     apk update --no-cache; \
     apk upgrade --no-cache; \
