@@ -1,4 +1,4 @@
-FROM ghcr.io/rekgrpth/gost
+FROM ghcr.io/rekgrpth/gost.docker
 RUN set -eux; \
     apk update --no-cache; \
     apk upgrade --no-cache; \
