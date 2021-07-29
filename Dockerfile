@@ -59,14 +59,14 @@ RUN set -eux; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/mustach"; \
     make -j"$(nproc)" libs=single install; \
-    cd "${HOME}"; \
+    cd /; \
     apk add --no-cache --virtual .pdf-rundeps \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | while read -r lib; do test ! -e "/usr/local/lib/$lib" && echo "so:$lib"; done) \
     ; \
     find /usr/local/bin -type f -exec strip '{}' \;; \
     find /usr/local/lib -type f -name "*.so" -exec strip '{}' \;; \
     apk del --no-cache .build-deps; \
-    find / -type f -name "*.a" -delete; \
-    find / -type f -name "*.la" -delete; \
+    find /usr -type f -name "*.a" -delete; \
+    find /usr -type f -name "*.la" -delete; \
     rm -rf "${HOME}" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
     echo done
