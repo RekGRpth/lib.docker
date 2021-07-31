@@ -46,7 +46,7 @@ jobs:
     strategy:
       matrix:
         repo:
-          - RekGRpth/django.docker
-          - RekGRpth/nginx.docker
-          - RekGRpth/postgres.docker
-          - RekGRpth/web2py.docker
+          - ${{ github.actor }}/django.docker
+          - ${{ github.actor }}/nginx.docker
+          - ${{ github.actor }}/postgres.docker
+          - ${{ github.actor }}/web2py.docker
