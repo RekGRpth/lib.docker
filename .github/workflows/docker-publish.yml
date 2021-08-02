@@ -14,7 +14,7 @@ jobs:
       group: ${{ github.ref }}
     env:
       REGISTRY: ghcr.io
-    name: ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.repository.name }}
+    name: ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.branch }}
     permissions:
       contents: read
       packages: write
@@ -44,12 +44,12 @@ jobs:
         with:
           client-payload: '{"repository": ${{ toJson(github.event.repository.name) }}}'
           event-type: latest
-          repository: ${{ matrix.repo }}
+          repository: ${{ github.actor }}/${{ matrix.repo }}
           token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
     strategy:
       matrix:
         repo:
-          - ${{ github.actor }}/django.docker
-          - ${{ github.actor }}/nginx.docker
-          - ${{ github.actor }}/postgres.docker
-          - ${{ github.actor }}/web2py.docker
+          - django.docker
+          - nginx.docker
+          - postgres.docker
+          - web2py.docker
