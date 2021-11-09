@@ -7,7 +7,6 @@ RUN set -eux; \
         automake \
         bison \
         check-dev \
-        cjson-dev \
         clang \
         file \
         flex \
@@ -16,7 +15,6 @@ RUN set -eux; \
         gcc \
         git \
         gnutls-dev \
-        jansson-dev \
         jpeg-dev \
         json-c-dev \
         libgcrypt-dev \
