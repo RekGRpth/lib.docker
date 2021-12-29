@@ -25,6 +25,7 @@ RUN set -eux; \
         make \
         musl-dev \
         openssl-dev \
+        pcre2-dev \
         pcre-dev \
         subunit-dev \
         talloc-dev \
