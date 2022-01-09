@@ -8,6 +8,7 @@ RUN set -eux; \
         bison \
         check-dev \
         clang \
+        cmake \
         file \
         flex \
         fltk-dev \
@@ -27,6 +28,7 @@ RUN set -eux; \
         openssl-dev \
         pcre2-dev \
         pcre-dev \
+        python2 \
         subunit-dev \
         talloc-dev \
         yaml-dev \
@@ -34,9 +36,10 @@ RUN set -eux; \
     ; \
     mkdir -p "${HOME}/src"; \
     cd "${HOME}/src"; \
-    git clone https://github.com/RekGRpth/handlebars.c.git; \
-    git clone https://github.com/RekGRpth/htmldoc.git; \
-    git clone https://github.com/RekGRpth/mustach.git; \
+    git clone -b master https://github.com/RekGRpth/handlebars.c.git; \
+    git clone -b master https://github.com/RekGRpth/htmldoc.git; \
+    git clone -b master https://github.com/RekGRpth/libgraphqlparser.git; \
+    git clone -b master https://github.com/RekGRpth/mustach.git; \
     cd "${HOME}/src/handlebars.c"; \
     ./configure --disable-refcounting --disable-static; \
     make -j"$(nproc)" install; \
@@ -47,6 +50,9 @@ RUN set -eux; \
     cd "${HOME}/src/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/htmldoc/data"; \
+    make -j"$(nproc)" install; \
+    cd "${HOME}/src/libgraphqlparser"; \
+    cmake .; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/mustach"; \
     make -j"$(nproc)" libs=single install; \
