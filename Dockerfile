@@ -36,6 +36,7 @@ RUN set -eux; \
     ; \
     mkdir -p "${HOME}/src"; \
     cd "${HOME}/src"; \
+    git clone -b main https://github.com/RekGRpth/libinjection.git; \
     git clone -b master https://github.com/RekGRpth/handlebars.c.git; \
     git clone -b master https://github.com/RekGRpth/htmldoc.git; \
     git clone -b master https://github.com/RekGRpth/libgraphqlparser.git; \
@@ -50,6 +51,8 @@ RUN set -eux; \
     cd "${HOME}/src/htmldoc/fonts"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/htmldoc/data"; \
+    make -j"$(nproc)" install; \
+    cd "${HOME}/src/libinjection/src"; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/libgraphqlparser"; \
     cmake .; \
