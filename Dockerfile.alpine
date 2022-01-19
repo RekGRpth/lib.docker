@@ -7,6 +7,10 @@ RUN set -eux; \
 FROM scratch
 COPY --from=builder . .
 ADD bin /usr/local/bin
+ENTRYPOINT [ "docker_entrypoint.sh" ]
+ENV HOME=/home
+MAINTAINER RekGRpth
+WORKDIR "$HOME"
 RUN set -eux; \
     chmod +x /usr/local/bin/*.sh; \
     apk add --no-cache --virtual .build \
