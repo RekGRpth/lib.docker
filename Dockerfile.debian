@@ -1,0 +1,62 @@
+ARG DOCKER_FROM=gost.docker:debian
+FROM "ghcr.io/rekgrpth/$DOCKER_FROM" AS builder
+RUN set -eux; \
+    apt-get update; \
+    apt-get full-upgrade -y --no-install-recommends; \
+    rm -rf /var/lib/apt/lists/* /var/cache/ldconfig/aux-cache /var/cache/ldconfig; \
+    echo done
+FROM scratch
+COPY --from=builder . .
+ADD bin /usr/local/bin
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive; \
+    export savedAptMark="$(apt-mark showmanual)"; \
+    chmod +x /usr/local/bin/*.sh; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        apt-utils \
+        autoconf \
+        automake \
+        bison \
+        check \
+        clang \
+        cmake \
+        file \
+        flex \
+        g++ \
+        gcc \
+        git \
+        gnutls-dev \
+        libc-dev \
+        libcjson-dev \
+        libfltk1.3-dev \
+        libgcrypt20-dev \
+        libjansson-dev \
+        libjpeg-dev \
+        libjson-c-dev \
+        liblmdb-dev \
+        libpcre2-dev \
+        libpcre3-dev \
+        libpng-dev \
+        libssl-dev \
+        libsubunit-dev \
+        libtalloc-dev \
+        libtool \
+        libyaml-dev \
+        make \
+        pkg-config \
+        python2 \
+        python3 \
+        zlib1g-dev \
+    ; \
+    docker_clone.sh; \
+    docker_build.sh; \
+    apt-mark auto '.*' > /dev/null; \
+    apt-mark manual $savedAptMark; \
+    find /usr/local -type f -executable -exec ldd '{}' ';' | grep -v 'not found' | awk '/=>/ { print $(NF-1) }' | sort -u | xargs -r dpkg-query --search | cut -d: -f1 | sort -u | xargs -r apt-mark manual; \
+    find /usr/local -type f -executable -exec ldd '{}' ';' | grep -v 'not found' | awk '/=>/ { print $(NF-1) }' | sort -u | xargs -r -i echo "/usr{}" | xargs -r dpkg-query --search | cut -d: -f1 | sort -u  | xargs -r apt-mark manual; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    rm -rf /var/lib/apt/lists/* /var/cache/ldconfig/aux-cache /var/cache/ldconfig; \
+    rm -rf "$HOME" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
+    find /usr -type f -name "*.la" -delete; \
+    echo done
