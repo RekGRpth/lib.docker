@@ -7,6 +7,7 @@ RUN set -eux; \
         automake \
         bison \
         check-dev \
+        cjson-dev \
         clang \
         cmake \
         file \
@@ -16,6 +17,7 @@ RUN set -eux; \
         gcc \
         git \
         gnutls-dev \
+        jansson-dev \
         jpeg-dev \
         json-c-dev \
         libgcrypt-dev \
@@ -40,6 +42,7 @@ RUN set -eux; \
     git clone -b master https://github.com/RekGRpth/handlebars.c.git; \
     git clone -b master https://github.com/RekGRpth/htmldoc.git; \
     git clone -b master https://github.com/RekGRpth/libgraphqlparser.git; \
+    git clone -b master https://github.com/RekGRpth/libjwt.git; \
     git clone -b master https://github.com/RekGRpth/mustach.git; \
     cd "${HOME}/src/handlebars.c"; \
     ./configure --disable-refcounting --disable-static; \
@@ -56,6 +59,9 @@ RUN set -eux; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/libgraphqlparser"; \
     cmake .; \
+    cd "${HOME}/src/libjwt"; \
+    autoreconf -vif; \
+    ./configure; \
     make -j"$(nproc)" install; \
     cd "${HOME}/src/mustach"; \
     make -j"$(nproc)" libs=single install; \
