@@ -1,12 +1,5 @@
 ARG DOCKER_FROM=gost.docker:debian
-FROM "ghcr.io/rekgrpth/$DOCKER_FROM" AS builder
-RUN set -eux; \
-    apt-get update; \
-    apt-get full-upgrade -y --no-install-recommends; \
-    rm -rf /var/lib/apt/lists/* /var/cache/ldconfig/aux-cache /var/cache/ldconfig; \
-    echo done
-FROM scratch
-COPY --from=builder . .
+FROM "ghcr.io/rekgrpth/$DOCKER_FROM"
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
@@ -17,6 +10,7 @@ RUN set -eux; \
     export savedAptMark="$(apt-mark showmanual)"; \
     chmod +x /usr/local/bin/*.sh; \
     apt-get update; \
+    apt-get full-upgrade -y --no-install-recommends; \
     apt-get install -y --no-install-recommends \
         apt-utils \
         autoconf \

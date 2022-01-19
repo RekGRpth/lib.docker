@@ -1,11 +1,5 @@
 ARG DOCKER_FROM=gost.docker:latest
-FROM "ghcr.io/rekgrpth/$DOCKER_FROM" AS builder
-RUN set -eux; \
-    apk update --no-cache; \
-    apk upgrade --no-cache; \
-    echo done
-FROM scratch
-COPY --from=builder . .
+FROM "ghcr.io/rekgrpth/$DOCKER_FROM"
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
@@ -13,6 +7,8 @@ MAINTAINER RekGRpth
 WORKDIR "$HOME"
 RUN set -eux; \
     chmod +x /usr/local/bin/*.sh; \
+    apk update --no-cache; \
+    apk upgrade --no-cache; \
     apk add --no-cache --virtual .build \
         autoconf \
         automake \
