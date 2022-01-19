@@ -12,7 +12,6 @@ RUN set -eux; \
         export savedAptMark="$(apt-mark showmanual)"; \
     fi; \
     chmod +x /usr/local/bin/*.sh; \
-    test "$DOCKER_BUILD" = "build" && "docker_add_group_and_user_$DOCKER_TYPE.sh"; \
     "docker_${DOCKER_BUILD}_$DOCKER_TYPE.sh"; \
     docker_clone.sh; \
     "docker_$DOCKER_BUILD.sh"; \
