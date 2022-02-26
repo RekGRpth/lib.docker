@@ -1,4 +1,4 @@
-ARG DOCKER_FROM=gost.docker:debian
+ARG DOCKER_FROM=gost.docker:ubuntu
 FROM "ghcr.io/rekgrpth/$DOCKER_FROM"
 RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
