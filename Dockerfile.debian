@@ -11,7 +11,7 @@ RUN set -eux; \
         bison \
         check \
         clang \
-        cmake \
+#        cmake \
         file \
         flex \
         g++ \
@@ -31,13 +31,13 @@ RUN set -eux; \
         libpng-dev \
         libssl-dev \
         libsubunit-dev \
-        libtalloc-dev \
+#        libtalloc-dev \
         libtool \
         libyaml-dev \
         make \
         pkg-config \
-        python2 \
-        python3 \
+#        python2 \
+#        python3 \
         zlib1g-dev \
     ; \
     mkdir -p "$HOME/src"; \
