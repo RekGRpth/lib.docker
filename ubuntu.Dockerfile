@@ -17,7 +17,7 @@ RUN set -eux; \
         g++ \
         gcc \
         git \
-        gnutls-dev \
+#        gnutls-dev \
         libc-dev \
         libcjson-dev \
         libfltk1.3-dev \

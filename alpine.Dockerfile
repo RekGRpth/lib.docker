@@ -16,7 +16,7 @@ RUN set -eux; \
         g++ \
         gcc \
         git \
-        gnutls-dev \
+#        gnutls-dev \
         jansson-dev \
         jpeg-dev \
         json-c-dev \
