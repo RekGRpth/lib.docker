@@ -27,7 +27,7 @@ RUN set -eux; \
         lmdb-dev \
         make \
         musl-dev \
-        openssl3-dev \
+#        openssl3-dev \
         pcre2-dev \
         pcre-dev \
 #        python2 \
