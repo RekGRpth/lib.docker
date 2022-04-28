@@ -27,7 +27,7 @@ RUN set -eux; \
         lmdb-dev \
         make \
         musl-dev \
-        openssl-dev \
+        openssl3-dev \
         pcre2-dev \
         pcre-dev \
 #        python2 \
@@ -53,7 +53,7 @@ RUN set -eux; \
 #    cd "$HOME/src/libjwt" && autoreconf -vif && ./configure && make -j"$(nproc)" install; \
     cd "$HOME/src/mustach" && make -j"$(nproc)" libs=single install; \
     apk add --no-cache --virtual .lib \
-        $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | grep -v "^$" | sort -u | while read -r lib; do test -z "$(find /usr/local/lib -name "$lib")" && echo "so:$lib"; done) \
+        $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | grep -v "^$" | grep -v -e libcrypto | sort -u | while read -r lib; do test -z "$(find /usr/local/lib -name "$lib")" && echo "so:$lib"; done) \
     ; \
     find /usr/local/bin -type f -exec strip '{}' \;; \
     find /usr/local/lib -type f -name "*.so" -exec strip '{}' \;; \
