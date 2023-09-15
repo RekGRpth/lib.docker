@@ -9,6 +9,7 @@ RUN set -eux; \
         check-dev \
         cjson-dev \
         clang \
+        cups-dev \
 #        cmake \
         file \
         flex \

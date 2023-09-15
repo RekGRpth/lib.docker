@@ -20,6 +20,7 @@ RUN set -eux; \
 #        gnutls-dev \
         libc-dev \
         libcjson-dev \
+        libcups2-dev \
         libfltk1.3-dev \
         libgcrypt20-dev \
         libjansson-dev \
